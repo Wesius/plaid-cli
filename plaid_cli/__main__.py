@@ -37,6 +37,9 @@ def _dispatch() -> None:
         "balances": "Show real-time account balances",
         "transactions": "List recent transactions [--days N] [--count N]",
         "spending": "Spending summary by category [--days N]",
+        "investments": "Show investment holdings and gains",
+        "liabilities": "Show loans, credit cards, mortgages",
+        "recurring": "Show recurring transactions and subscriptions",
         "identity": "Show identity info for linked accounts",
     }
 
@@ -89,6 +92,18 @@ def _dispatch() -> None:
         from plaid_cli.spending import run
 
         run(days=days)
+    elif cmd == "investments":
+        from plaid_cli.investments import run
+
+        run()
+    elif cmd == "liabilities":
+        from plaid_cli.liabilities import run
+
+        run()
+    elif cmd == "recurring":
+        from plaid_cli.recurring import run
+
+        run()
     elif cmd == "identity":
         from plaid_cli.identity import run
 

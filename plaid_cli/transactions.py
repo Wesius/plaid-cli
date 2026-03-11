@@ -46,11 +46,13 @@ def run(days: int = 30, count: int = 50) -> None:
     print("  " + "-" * 85)
 
     for txn in txns:
-        cat = (
-            txn["category"][0]
-            if txn.get("category") and len(txn["category"]) > 0
-            else ""
-        )
+        pfc = txn.get("personal_finance_category")
+        if pfc and pfc.get("primary"):
+            cat = pfc["primary"]
+        elif txn.get("category") and len(txn["category"]) > 0:
+            cat = txn["category"][0]
+        else:
+            cat = ""
         name = txn.get("merchant_name") or txn["name"]
         amt = txn["amount"]
 

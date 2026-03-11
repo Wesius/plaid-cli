@@ -54,11 +54,13 @@ def run(days: int = 30) -> None:
         amt = txn["amount"]
         if amt <= 0:
             continue
-        cat = (
-            txn["category"][0]
-            if txn.get("category") and len(txn["category"]) > 0
-            else "Other"
-        )
+        pfc = txn.get("personal_finance_category")
+        if pfc and pfc.get("primary"):
+            cat = pfc["primary"]
+        elif txn.get("category") and len(txn["category"]) > 0:
+            cat = txn["category"][0]
+        else:
+            cat = "Other"
         by_category[cat] += amt
         total_spent += amt
 

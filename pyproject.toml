@@ -1,0 +1,27 @@
+[project]
+name = "plaid-cli"
+version = "0.1.0"
+description = "CLI for Plaid financial data"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "plaid-python>=29.0",
+    "python-dotenv>=1.0",
+]
+
+[project.scripts]
+plaid = "plaid_cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["plaid_cli"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
